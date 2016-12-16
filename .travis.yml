@@ -1,4 +1,13 @@
 language: cpp
-script:
-  - g++ --version
-  - g++ -Wall -Wextra -pedantic Project1/Project1/Source.cpp && ./a.out
+compiler:
+  - gcc
+  - clang
+# trusty (14.04) is now used instead of precise (12.04)
+sudo: required
+dist: trusty
+before_script:
+  - mkdir build
+  - cd build
+  - cmake --version
+  - cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
+script: make && ./a.out && ls -lsa
